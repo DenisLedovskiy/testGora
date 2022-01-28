@@ -9,5 +9,4 @@ import Foundation
 
 struct Album: Codable {
     let id: Int
-    let userId: Int
 }

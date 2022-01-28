@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Photo: Codable {
+struct PhotoJson: Codable {
     let albumId: Int
     let id: Int
     let title: String

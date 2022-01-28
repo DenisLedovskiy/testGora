@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import UIKit
+
+struct Photo {
+    var image = UIImage()
+    var text = String()
+}

@@ -7,14 +7,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class UsersViewController: UIViewController {
 
 
     @IBOutlet weak var tableView: UITableView!
 
-    var dataSource: [Users] = []
+    var usersArray: [Users] = []
 
     let urlUsers = URL(string: "https://jsonplaceholder.typicode.com/users")
+    let fromUsersToPhorosIdentifire = "fromUsersToPhotos"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class ViewController: UIViewController {
 
            do {
                let users = try JSONDecoder().decode([Users].self, from: data)
-               self?.dataSource = users
+               self?.usersArray = users
                DispatchQueue.main.async {
                    self?.tableView.reloadData()
                }
@@ -44,21 +45,13 @@ class ViewController: UIViewController {
         tableView.dataSource = self
     }
 
-}
-
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == fromUsersToPhorosIdentifire,
+           let sourceVC = segue.source as? UsersViewController,
+            let destinationVC = segue.destination as? PhotoViewController,
+           let user = sender as? Users {
+            destinationVC.usersId = user.id
+        }
     }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        let user = dataSource[indexPath.row]
-        cell?.textLabel?.text = "\(user.name)"
-        return cell ?? UITableViewCell()
-    }
-
-
 }
 
