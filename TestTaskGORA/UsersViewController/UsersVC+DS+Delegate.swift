@@ -21,7 +21,7 @@ extension UsersViewController: UITableViewDataSource, UITableViewDelegate {
         return cell ?? UITableViewCell()
     }
 
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: fromUsersToPhorosIdentifire, sender: usersArray[indexPath.row])
     }
 }
